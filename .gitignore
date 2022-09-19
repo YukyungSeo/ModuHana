@@ -1,0 +1,9 @@
+/bin/
+/.settings/
+.classpath 
+.project
+/build/
+/target/
+**/*.properties
+**/spring-mvc.xml
+**/secure.js
