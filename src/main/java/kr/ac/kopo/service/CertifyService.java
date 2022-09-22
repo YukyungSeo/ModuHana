@@ -194,7 +194,7 @@ public class CertifyService {
 		accountVO.setTypeCode("02"); // 02는 예치금 계좌
 
 		// api request 보내기
-		String url = "http://localhost:9990/HanaBank/account/create";
+		String url = "http://localhost:9990/HanaBank/account/create/member";
 
 		JSONObject param = new JSONObject();
 		param.put("user", new JSONObject(memberVO));

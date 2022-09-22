@@ -51,10 +51,10 @@ public class HttpUtil {
 				}
 
 				// 응답 데이터
-				if(sb != null) {
+				if(sb != null && sb.length() != 0) {
 					System.out.println("responseJson:: " + sb.toString());
+					responseJson = new JSONObject(sb.toString());
 				}
-				responseJson = new JSONObject(sb.toString());
 
 				return responseJson;
 			}

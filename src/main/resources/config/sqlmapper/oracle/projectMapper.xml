@@ -109,7 +109,7 @@
 		<include refid="selectColumnFile" />
 		<include refid="selectWhere" />
 		<include refid="selectWhereFile" />
-		AND P.PROGRESS_CODE IN(2, 3, 4, 5, 7)
+		AND P.PROGRESS_CODE IN(2, 3, 4, 5, 7, 10, 11)
 		AND P.SUBJECT_NO = #{ subjectNo }
 		<include refid="selectOrder" />
 	</select>
@@ -119,7 +119,7 @@
 		<include refid="selectColumnFile" />
 		<include refid="selectWhere" />
 		<include refid="selectWhereFile" />
-		AND P.PROGRESS_CODE IN(2, 3, 4, 5, 7)
+		AND P.PROGRESS_CODE IN(2, 3, 4, 5, 7, 10, 11)
 		<include refid="selectOrder" />
 	</select>
 	<select id="selectByProjectSeq" parameterType="String"

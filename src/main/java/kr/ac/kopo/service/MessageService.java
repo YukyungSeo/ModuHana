@@ -4,12 +4,14 @@ import java.util.HashMap;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
+@PropertySource("classpath:coolsms.properties")
 public class MessageService {
 
 	@Value("${apikey}")
@@ -30,7 +32,7 @@ public class MessageService {
 		params.put("from", fromNumber);
 		params.put("type", "SMS");
 		params.put("text", message);
-		params.put("app_version", "test app 1.2"); // application name and version
+		params.put("ModuHana", "test app 1.2"); // application name and version
 
 		try {
 			JSONObject obj = (JSONObject) coolsms.send(params);

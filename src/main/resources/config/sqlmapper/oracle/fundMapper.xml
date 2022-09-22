@@ -10,7 +10,6 @@
 		<result column="project_expire_date" property="projectExpireDate" />
 		<result column="member_account_no" property="memberAccountNo" />
 		<result column="fund_date" property="fundDate" />
-		<result column="customs_duty" property="customsDuty" />
 		<result column="payoff_date" property="payoffDate" />
 	</resultMap>
 	<resultMap id="fundMap" type="fundVO">
@@ -25,10 +24,8 @@
             F.MEMBER_ACCOUNT_NO,
             F.AMOUNT,
             F.FUND_DATE,
-            F.PROCEEDS,
-            F.CUSTOMS_DUTY,
-            F.COMMISSION,
-            F.DEDUCTIBLE,
+            F.TAX,
+            F.FEE,
             F.PAYOFF_DATE
         FROM FUND F, PROJECT P
         WHERE F.PROJECT_SEQ = P.PROJECT_SEQ
@@ -42,13 +39,13 @@
 	<select id="selectInProgressFundByMemberAccountNo" parameterType="String" resultMap="fundVO">
 		<include refid="selectColumn" />
         AND F.MEMBER_ACCOUNT_NO = #{ memberAccountNo }
-        AND 05 > P.PROGRESS_CODE
+        AND P.PROGRESS_CODE IN (3, 4)
         <include refid="selectOrder" />
 	</select>
 	<select id="selectCumulativeFundByMemberAccountNo" parameterType="String" resultMap="fundVO">
 		<include refid="selectColumn" />
         AND F.MEMBER_ACCOUNT_NO = #{ memberAccountNo }
-        AND 05 = P.PROGRESS_CODE
+        AND P.PROGRESS_CODE = 5
         <include refid="selectOrder" />
 	</select>
 	<select id="selectInProgressSumCost" parameterType="String" resultType="String">
@@ -56,14 +53,14 @@
         FROM FUND F, PROJECT P
         WHERE F.PROJECT_SEQ = P.PROJECT_SEQ
         AND F.MEMBER_ACCOUNT_NO = #{ memberAccountNo }
-        AND 05 > P.PROGRESS_CODE
+        AND P.PROGRESS_CODE IN (3, 4)
 	</select>
 	<select id="selectCumulativeSumCost" parameterType="String" resultType="String">
         SELECT TO_CHAR(SUM(AMOUNT), '999,999,999,999') AS SUMCOST
         FROM FUND F, PROJECT P
         WHERE F.PROJECT_SEQ = P.PROJECT_SEQ
         AND F.MEMBER_ACCOUNT_NO = #{ memberAccountNo }
-        AND 05 = P.PROGRESS_CODE
+        AND P.PROGRESS_CODE = 5
 	</select>
 	<select id="selectByFundSeq" parameterType="String" resultMap="fundVO">
         <include refid="selectColumn" />

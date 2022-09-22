@@ -13,9 +13,8 @@ public class FundVO {
 	private String amount;
 	private String fundDate;
 	private String proceeds;
-	private String customsDuty;
-	private String commission;
-	private String deductible;
+	private String tax;
+	private String fee;
 	private String payoffDate;
 
 }
