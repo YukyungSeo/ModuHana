@@ -100,6 +100,10 @@
 	<sql id="selectOrder">
 		ORDER BY FUND_START DESC
 	</sql>
+	<sql id="selectNine">
+        OFFSET 0 ROWS
+        FETCH NEXT 9 ROWS ONLY
+	</sql>
 	
 	
 	<!-- select -->
@@ -112,6 +116,7 @@
 		AND P.PROGRESS_CODE IN(2, 3, 4, 5, 7, 10, 11)
 		AND P.SUBJECT_NO = #{ subjectNo }
 		<include refid="selectOrder" />
+		<include refid="selectNine" />
 	</select>
 	<select id="selectAll" parameterType="String"
 		resultMap="projectVO">
@@ -121,6 +126,7 @@
 		<include refid="selectWhereFile" />
 		AND P.PROGRESS_CODE IN(2, 3, 4, 5, 7, 10, 11)
 		<include refid="selectOrder" />
+		<include refid="selectNine" />
 	</select>
 	<select id="selectByProjectSeq" parameterType="String"
 		resultMap="projectVO">

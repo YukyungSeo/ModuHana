@@ -159,9 +159,13 @@
 					
 					<div class="blog-pagination">
 						<ul class="justify-content-center">
+							<li style="background-color:pink;color:white"><a href="#">≪</a></li>
 							<li class="active"><a href="#">1</a></li>
 							<li><a href="#">2</a></li>
 							<li><a href="#">3</a></li>
+							<li>。。。</li>
+							<li><a href="#">23</a></li>
+							<li style="background-color:pink;color:white"><a href="#">≫</a></li>
 						</ul>
 					</div>
 					<!-- End blog pagination -->

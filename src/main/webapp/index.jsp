@@ -58,13 +58,9 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<h2 data-aos="fade-down">
-							Welcome to <span>UpConstruction</span>
+							K-콘텐츠 투자 플랫폼 <br><span>모두하나</span>
 						</h2>
-						<p data-aos="fade-up">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-							exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat.</p>
+						<p data-aos="fade-up">누구나 문화콘텐츠에 투자할 수 있는 기회. <br>모두하나를 통해 콘텐츠에 투자하세요. <br> 드라마, 영화, 뮤지컬, 음악, 공연 등 여러 분야의 상품이 여러분을 기다립니다.</p>
 						<a data-aos="fade-up" data-aos-delay="200" href="#get-started"
 							class="btn-get-started">Get Started</a>
 					</div>
