@@ -60,8 +60,8 @@
 		<div class="limiter">
 			<div class="container-login100">
 				<div class="wrap-login100">
-					<div class="login100-pic js-tilt" data-tilt>
-						<img src="https://colorlib.com/etc/lf/Login_v1/images/img-01.png"
+					<div class="login100-pic js-tilt" style="display: flex;align-items:center;width: 60%;" data-tilt>
+						<img src="${ path }/resources/assets/img/login/login-pana.png"
 							alt="IMG">
 					</div>
 

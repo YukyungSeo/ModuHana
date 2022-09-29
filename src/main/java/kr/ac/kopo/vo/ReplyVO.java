@@ -7,7 +7,7 @@ public class ReplyVO {
 
 	private String replySeq;
 	private String projectSeq;
-	private String memberId;
+	private String userId;
 	private String superReply;
 	private String content;
 	private String depth;

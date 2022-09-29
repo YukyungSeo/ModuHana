@@ -165,7 +165,7 @@
 							class="info-item  d-flex flex-column justify-content-center align-items-center">
 							<i class="bi bi-piggy-bank"></i>
 							<h3>현재까지 수익</h3>
-							<p>+1 5589 55488 55</p>
+							<p>${ fundMap.sumProceeds } 원</p>
 						</div>
 					</div>
 					<!-- End Info Item -->
@@ -251,6 +251,14 @@
 						
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>투자 현황</h4>
+										
+										<div class="row mt-3">
+											<div class="col-lg-6" id="inProgressFundChart">
+											</div>
+											<div class="col-lg-6" id="cumulativeFundStatus">
+											</div>
+										</div>
+										
 									</div>
 									<!-- End feature item-->
 								</div>
@@ -502,6 +510,144 @@
         	$('#amountShow').val(putComa(amountShowVal));
 		});
         
+	</script>
+	<!-- My Javascript -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/color-js/1.0/color.min.js" integrity="sha512-RpdNjGMyXXWMxBLCPGQUUInZYVJjfS2w6SYCYHF4cBok/nIUV977C08RSRx0t5ABIIw9JxceiY7iwMPbXwX0yA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+	Highcharts.setOptions({
+	    colors: [
+	    	'#e90061'
+	    	, '#4287f5'
+		]
+	});
+	
+	const pieColors = (function () {
+	    var colors = [],
+	        base = Highcharts.getOptions().colors[0],
+	        i;
+
+	    for (i = 0; i < 10; i += 1) {
+	        // Start out with a darkened base color (negative brighten), and end
+	        // up with a much brighter color
+	        colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
+	    }
+	    return colors;
+	}());
+	
+	const inProgressFundChartData = [];
+	<c:forEach items="${ fundMap.inProgressFund }" var="fund">
+		inProgressFundChartData.push({ name:'${ fund.projectTitle }', y: ${ fund.amount } });
+	</c:forEach>
+	
+	
+	// Data retrieved from https://netmarketshare.com/
+	Highcharts.chart('inProgressFundChart', {
+	    chart: {
+	    	backgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie',
+	        marginTop: 50
+	    },
+	    title: {
+	        text: '<b>투자금 배분 현황</ㅠ>'
+	    },
+	    tooltip: {
+	        pointFormat: ': <b>{point.percentage:.1f}%</b>'
+	    },
+	    accessibility: {
+	        point: {
+	            valueSuffix: '%'
+	        }
+	    },
+	    plotOptions: {
+	        pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            colors: pieColors,
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+	                distance: -50,
+	                filter: {
+	                    property: 'percentage',
+	                    operator: '>',
+	                    value: 4
+	                }
+	            }
+	        }
+	    },
+	    series: [{
+	        name: 'Share',
+	        data: inProgressFundChartData
+	    }]
+	});
+	</script>
+	
+	<script>
+	const titleData = [];
+	const amountData = [];
+	const payoffData = [];
+	<c:forEach items="${ fundMap.cumulativeFund }" var="fund">
+		titleData.push('${fund.projectTitle}');
+		amountData.push(${fund.amount});
+		payoffData.push(${fund.payoff});
+	</c:forEach>
+	console.log(amountData);
+	console.log(payoffData);
+	
+	// Data retrieved from https://www.yr.no/nb
+	Highcharts.chart('cumulativeFundStatus', {
+	    chart: {
+	    	backgroundColor: null,
+	        type: 'column',
+	        marginTop: 50
+	    },
+	    title: {
+	        text: '<b>누적 투자 현황</ㅠ>'
+	    },
+	    subtitle: null,
+	    xAxis: {
+	        categories: titleData,
+	        crosshair: true
+	    },
+	    yAxis: {
+	        title: {
+	            useHTML: true,
+	            text: '금액(원)'
+	        }
+	    },
+	    tooltip: {
+	        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+	        footerFormat: '</table>',
+	        shared: true,
+	        useHTML: true
+	    },
+	    plotOptions: {
+	        column: {
+	            pointPadding: 0.2,
+	            borderWidth: 0
+	        }
+	    },
+	    series: [{
+	        name: '투자금',
+	        data: amountData
+
+	    }, {
+	        name: '정산금',
+	        data: payoffData
+
+	    }]
+	});
 	</script>
 </body>
 

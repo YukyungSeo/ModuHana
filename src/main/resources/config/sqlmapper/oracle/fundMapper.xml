@@ -26,6 +26,7 @@
             F.FUND_DATE,
             F.TAX,
             F.FEE,
+            F.PAYOFF,
             F.PAYOFF_DATE
         FROM FUND F, PROJECT P
         WHERE F.PROJECT_SEQ = P.PROJECT_SEQ
@@ -66,7 +67,11 @@
         <include refid="selectColumn" />
         AND F.FUND_SEQ = #{ fundSeq }
 	</select>
-
+	<select id="selectSumProceeds" parameterType="String" resultType="String">
+        SELECT TO_CHAR(SUM(PAYOFF - AMOUNT), '999,999,999,999')
+		FROM FUND
+		WHERE MEMBER_ACCOUNT_NO = #{ memberAccountNo }
+	</select>
 	
 	<!-- procedure -->
 	<select id="procedureFunding" parameterType="fundVO" statementType="CALLABLE">

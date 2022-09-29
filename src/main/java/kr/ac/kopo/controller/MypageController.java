@@ -39,8 +39,6 @@ public class MypageController {
 		Map<String, Object> fundMap = fundService.getFundListWithAccountNo(myAccount.getAccountNo());
 		model.addAttribute("fundMap", fundMap);
 
-		// 투자 현황(그래프)
-
 		// 예치금 현황 - 계좌 정보
 		myAccount = accountService.getAccountByAccountNoFromBankAPI(myAccount.getAccountNo());
 		model.addAttribute("myAccount", myAccount);
@@ -48,7 +46,7 @@ public class MypageController {
 		// 예치금 현황 - 거래내역
 		List<TransactionVO> transactionList = accountService.getTransactionListByAccountNoFromBankAPI(myAccount.getAccountNo());
 		model.addAttribute("transactionList", transactionList);
-
+		
 		return "member/mypage";
 	}
 }

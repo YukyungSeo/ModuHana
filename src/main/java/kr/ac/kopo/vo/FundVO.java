@@ -15,6 +15,7 @@ public class FundVO {
 	private String proceeds;
 	private String tax;
 	private String fee;
+	private String payoff;
 	private String payoffDate;
 
 }

@@ -243,7 +243,7 @@
 									<h4 class="pb-3">Leave a Reply</h4>
 									<form action="${ path }/project/detail/${ project.projectSeq }" method="post" name="replyForm">
 										<input type="hidden" name="projectSeq" value="${ project.projectSeq }">
-										<input type="hidden" name="memberId" value="${ user.id }">
+										<input type="hidden" name="userId" value="${ user.id }">
 										<input type="hidden" name="depth" value="0">
 										<div class="row">
 											<div class="col form-group">
@@ -261,7 +261,7 @@
 										<div class="d-flex">
 											<div>
 												<h5>
-													${ reply.memberId }
+													${ reply.userId }
 													<a href="javascript:displayRereplyDiv(${ reply.replySeq })" class="reply">
 														<i class="bi bi-reply-fill"></i> Reply
 													</a>
@@ -278,7 +278,7 @@
 										<form action="${ path }/project/detail/${ project.projectSeq }" method="post" name="rereplyForm">
 											<input type="hidden" name="projectSeq" value="${ project.projectSeq }">
 											<input type="hidden" name="superReply" value="${ reply.replySeq }">
-											<input type="hidden" name="memberId" value="${ user.id }">
+											<input type="hidden" name="userId" value="${ user.id }">
 											<input type="hidden" name="depth" value="${ reply.depth + 1 }">
 											<div class="row">
 												<div class="col form-group">

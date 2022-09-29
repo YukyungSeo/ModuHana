@@ -124,7 +124,7 @@
 								</div>
 
 								<hr>
-								<p><c:out value="${ project.summary }"/></p>
+								<%-- <p><c:out value="${ project.summary }"/></p> --%>
 								
 								<!-- 알림 신청 -->
 								<c:if test="${ project.startDDay > 0 }">

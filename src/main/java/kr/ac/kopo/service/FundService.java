@@ -31,6 +31,8 @@ public class FundService {
 		if (cumulativeCost == null) {
 			cumulativeCost = "0";
 		}
+		
+		String sumProceeds = fundDAO.selectSumProceeds(accountNo);
 
 		fundMap.put("inProgressFund", inProgressFund);
 		fundMap.put("inProgressCost", inProgressCost);
@@ -39,6 +41,8 @@ public class FundService {
 		fundMap.put("cumulativeFund", cumulativeFund);
 		fundMap.put("cumulativeCost", cumulativeCost);
 		fundMap.put("cumulativeFundSize", cumulativeFund.size());
+		
+		fundMap.put("sumProceeds", sumProceeds);
 
 		return fundMap;
 

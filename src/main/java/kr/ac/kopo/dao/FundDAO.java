@@ -39,4 +39,8 @@ public class FundDAO {
 		return sqlSessionTemplate.selectOne("dao.FundDAO.selectByFundSeq", fundSeq);
 	}
 
+	public String selectSumProceeds(String accountNo) {
+		return sqlSessionTemplate.selectOne("dao.FundDAO.selectSumProceeds", accountNo);
+	}
+
 }

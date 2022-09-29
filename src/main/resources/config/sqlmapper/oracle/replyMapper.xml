@@ -6,7 +6,7 @@
 	<resultMap type="replyVO" id="replyVO">
 		<result column="REPLY_SEQ" property="replySeq" />
 		<result column="PROJECT_SEQ" property="projectSeq" />
-		<result column="MEMBER_ID" property="memberId" />
+		<result column="USER_ID" property="userId" />
 		<result column="SUPER_REPLY" property="superReply" />
 		<result column="REG_DATE" property="regDate" />
 	</resultMap>
@@ -22,7 +22,7 @@
 	
 	<!-- DML -->
 	<insert id="insert" parameterType="replyVO">
-		INSERT INTO REPLY(REPLY_SEQ, PROJECT_SEQ, MEMBER_ID, SUPER_REPLY, CONTENT, DEPTH)
-		VALUES(SEQ_REPLY.NEXTVAL, #{ projectSeq }, #{ memberId }, #{ superReply }, #{ content } , #{ depth })
+		INSERT INTO REPLY(REPLY_SEQ, PROJECT_SEQ, USER_ID, SUPER_REPLY, CONTENT, DEPTH)
+		VALUES(SEQ_REPLY.NEXTVAL, #{ projectSeq }, #{ userId }, #{ superReply }, #{ content } , #{ depth })
 	</insert>
 </mapper>
