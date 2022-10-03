@@ -83,7 +83,7 @@
 						<div class="post-item position-relative h-100">
 
 							<div class="post-img position-relative overflow-hidden">
-								<img src="${ path }/${ project.signImgPath }/${ project.signImgName }" class="img-fluid" alt="">
+								<img src="${ path }/${ project.signImgPath }/${ project.signImgName }" class="img-fluid" alt="" style="height: 230px;">
 								<span class="post-date">
 									<c:choose>
 										<c:when test="${ project.startDDay > 0 }">
@@ -101,7 +101,7 @@
 
 							<div class="post-content d-flex flex-column">
 
-								<a href="${ path }/project/detail/${ project.projectSeq }" class="readmore stretched-link">
+								<a href="${ path }/project/detail/${ project.projectSeq }" class="readmore stretched-link" style="height: 100px;">
 									<h3 class="post-title">
 											<c:out value="${ project.title }"/>
 									</h3>
@@ -128,7 +128,7 @@
 								
 								<!-- 알림 신청 -->
 								<c:if test="${ project.startDDay > 0 }">
-									<button type="button" class="btn btn-primary bg-white border text-dark auto"> <i class="bi bi-bell"></i> 알림신청 </button>
+									<button type="button" class="mt-5 btn btn-primary bg-white border text-dark auto"> <i class="bi bi-bell"></i> 알림신청 </button>
 								</c:if>
 								
 								<!-- 진행률 -->

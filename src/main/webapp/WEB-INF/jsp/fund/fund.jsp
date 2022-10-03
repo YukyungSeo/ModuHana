@@ -101,7 +101,7 @@
 							
 							<div class="col-lg-12 form-group mt-3">
 								<input type="text" name="amount" class="form-control text-end" style="display:none">
-								<input type="text" id="amountShow" name="amountShow" class="form-control text-end" placeholder="최소투자금액 배수 단위로 입력해주세요 (원)">
+								<input type="text" id="amountShow" name="amountShow" class="form-control text-end" onchange="fundAmtCheck()" placeholder="최소투자금액 배수 단위로 입력해주세요 (원)">
 							</div>
 							
 							<div class="row gy-4">
@@ -130,7 +130,7 @@
 									<p class="primary-color fw-bold">투자금액</p>
 								</div>
 								<div class="col-lg-6 form-group text-end">
-									<p class="primary-color" id="fund-amount-p"></p>
+									<p class="primary-color" id="fundAmountCheck">0 원</p>
 								</div>
 							</div>
 							
@@ -311,8 +311,13 @@
 		function fundAmountBtn(val) {
 			let amountInput = document.fundForm.amount;
 			let amountShowInput = document.fundForm.amountShow;
+			let fundAmountCheckP = document.getElementById('fundAmountCheck');
+			
 			amountInput.value = Number(amountInput.value) + val * 10000;
-			amountShowInput.value = putComa(String(Number(amountShowInput.value.replace(',', '')) + val * 10000));
+			let value = putComa(String(Number(amountShowInput.value.replace(',', '')) + val * 10000));
+			amountShowInput.value = value;
+			fundAmountCheckP.innerHTML = value + ' 원';
+			
 		}
 		
 		function gotoPasswordModal() {
@@ -358,12 +363,6 @@
         function putComa(val){
         	return val.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         }
-        
-        $('#amountShow').change(function(){
-        	let amountShowVal = $('#amountShow').val().replace(',', '');
-        	$('input[name=amount]').val(amountShowVal);
-        	$('#amountShow').val(putComa(amountShowVal));
-		});
         
         function authMessage() {
 			let telnum = document.fundForm.phone.value;
@@ -414,6 +413,7 @@
 				}
 			})
 		}
+        
 	</script>
 </body>
 

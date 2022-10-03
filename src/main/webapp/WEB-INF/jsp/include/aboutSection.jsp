@@ -7,16 +7,25 @@
 		<section id="about" class="about mt-5">
 			<div class="container mt-5" data-aos="fade-up">
 
-				<div class="row position-relative">
 
-					<div class="col-lg-7 about-img"
-						style="background-image: url('${ path }/${ projectFileMap.sign.path }/${ projectFileMap.sign.saveName }');"></div>
+				<div class="col-lg-12 text-center">
+					<h3 class="mb-3" style="color: #aaaaaa;">
+						<c:if test="${ project.subjectNo eq '2' }">
+							<i class="fa-solid fa-hands"></i>
+						</c:if> 
+						${ project.subjectName }
+					</h3>
+					<h2 style="max-width: none;">${ project.title }</h2>
+				</div>
+				
+				<div class="row">
+					
+					<div class="col-lg-7 rounded-start"
+						style="background-image: url('${ path }/${ projectFileMap.sign.path }/${ projectFileMap.sign.saveName }'); background-repeat:no-repeat; background-size:cover;"></div>
 
 					<div class="col-lg-5">
-						<h3>icon ${ project.subjectName }</h3>
-						<h2>${ project.title }</h2>
-						<div class="our-story">
-							<h4 class="text-center mb-5">
+						<div class="our-story rounded-end">
+							<h4 class="text-center mb-5 mt-2">
 								<c:choose>
 									<c:when test="${ project.startDDay > 0 }">
 										<span class="fw-bold rounded-pill p-2 mt-2">모집 예정</span>
@@ -62,20 +71,22 @@
 								
 							</div>
 							<div class="row text-center mt-3">
+								<div class="col-lg-10">
 								<c:choose>
 									<c:when test="${ project.startDDay > 0 }">
-										<button type="button" class="btn btn-primary bg-white border text-dark auto" style="width:80%" > <i class="bi bi-bell"></i> 알림신청 </button>
+										<a type="button" class="btn btn-primary bg-white border text-dark auto" style="width: 100%;margin: 10px;height: 52px;padding-top: 10px;" > <i class="bi bi-bell"></i> 알림신청 </a>
 									</c:when>
 									<c:when test="${ project.endDDay > 0 }">
-										<a href="${ path }/fund/${ project.projectSeq }" data-aos="fade-up" data-aos-delay="200" class="btn-fund-started aos-init aos-animate fw-bold">투자하기</a>
+										<a href="${ path }/fund/${ project.projectSeq }" data-aos="fade-up" data-aos-delay="200" class="btn-fund-started aos-init aos-animate fw-bold" style="width:100%">투자하기</a>
 									</c:when>
 								</c:choose>
-								<a id="kakaotalk-sharing-btn" href="javascript:;" style="width:10%">
-									<img
-									  src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
-									  alt="카카오톡 공유 보내기 버튼"
-									/>
-								</a>
+								</div>
+								<div class="col-lg-2">
+									<a id="kakaotalk-sharing-btn" href="javascript:;">
+										<img class="rounded-circle border border-3 border-danger" alt="" src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+										style="height: 52px; margin-top: 10px;">
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>

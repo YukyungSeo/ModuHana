@@ -38,6 +38,7 @@
 <link href="${ path }/resources/assets/vendor/glightbox/css/glightbox.min.css"
 	rel="stylesheet">
 <link href="${ path }/resources/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/3b179c433e.js" crossorigin="anonymous"></script>
 
 <!-- Template Main CSS File -->
 <link href="${ path }/resources/assets/css/main.css" rel="stylesheet">
