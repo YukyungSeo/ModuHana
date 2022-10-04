@@ -24,6 +24,7 @@
             F.MEMBER_ACCOUNT_NO,
             F.AMOUNT,
             F.FUND_DATE,
+            ROUND((P.REPAYMENT / P.FUND_AMT) - 1, 5) * 100 AS PROCEEDS,
             F.TAX,
             F.FEE,
             F.PAYOFF,

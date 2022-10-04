@@ -77,9 +77,81 @@
 								</tr>
 							</table>
 							
+							<c:if test="${ project.progressCode eq 5 }">
+							<h5 class="fw-bold border-bottom border-3 mt-5">세부정산내역</h5>
+							<table class="table my-3" id="transaction-table">
+								<tr>
+									<th scope="col">투자금액[A]</th>
+									<td class="text-end"><fmt:formatNumber value="${ fund.amount }" pattern="#,###"/>원</td>
+								</tr>
+								<tr style="color:#bbbbbb">
+									<th scope="col">투자 수익금(수익률)</th>
+									<td class="text-end"><fmt:formatNumber value="${ fund.payoff - fund.amount + fund.tax + fund.fee }" pattern="#,###"/>원(${ fund.proceeds }%)</td>
+								</tr>
+								<tr style="color:#bbbbbb">
+									<th scope="col">비용(제세공과금/수수료)</th>
+									<td class="text-end"><fmt:formatNumber value="${ fund.tax + fund.fee }" pattern="#,###"/>원</td>
+								</tr>
+								<tr>
+									<th scope="col">비용 공제 후 수익금[B]</th>
+									<td class="text-end"><fmt:formatNumber value="${ fund.payoff - fund.amount  }" pattern="#,###"/>원</td>
+								</tr>
+								<tr>
+									<th scope="col">총 지급액([A]+[B])</th>
+									<td class="text-end"><fmt:formatNumber value="${ fund.payoff }" pattern="#,###"/>원</td>
+								</tr>
+							</table>
+							</c:if>
+							
 							<h5 class="fw-bold border-bottom border-3 mt-5">프로젝트 진행도</h5>
-							${ project.progressCode }
-							${ project.progressName }
+							<c:choose>
+							<c:when test="${ project.progressCode eq '3' }">
+							<img class="mt-3" alt="" src="${ path }/resources/assets/img/gif/step1.png" style="width:100%">
+							</c:when>
+							<c:when test="${ project.progressCode eq '5' }">
+							<img class="mt-3" alt="" src="${ path }/resources/assets/img/gif/step3.png" style="width:100%">
+							</c:when>
+							<c:otherwise>
+							<img class="mt-3" alt="" src="${ path }/resources/assets/img/gif/step2.png" style="width:100%">
+							</c:otherwise>
+							</c:choose>
+							<div class="row gy-4">
+								<div class="col-lg-4 form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+									<div class="mt-3">투자신청</div>
+									<div><fmt:parseDate value="${ fund.fundDate }" pattern="yyyy-MM-dd HH:mm:ss" var="fundDate"/><fmt:formatDate value="${ fundDate }" pattern="yyyy-MM-dd"/></div>
+								</div>
+								<c:choose>
+								<c:when test="${ project.progressCode eq '3' }">
+									<div class="col-lg-4 form-group" style="opacity:0.4; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+										<div class="mt-3">투자종료</div>
+										<div>${ project.fundEnd }</div>
+									</div>
+									<div class="col-lg-4 form-group" style="opacity:0.4; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+										<div class="mt-3">투자금정산</div>
+										<div><fmt:parseDate value="${ project.repaymentDate }" pattern="yyyy-MM-dd HH:mm:ss" var="repaymentDate"/><fmt:formatDate value="${ repaymentDate }" pattern="yyyy-MM-dd"/></div>
+									</div>
+								</c:when>
+								<c:when test="${ project.progressCode eq '5' }">
+									<div class="col-lg-4 form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+										<div class="mt-3">투자종료</div>
+										<div>${ project.fundEnd }</div>
+									</div>
+									<div class="col-lg-4 form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+										<div class="mt-3">투자금정산</div>
+										<div><fmt:parseDate value="${ project.repaymentDate }" pattern="yyyy-MM-dd HH:mm:ss" var="repaymentDate"/><fmt:formatDate value="${ repaymentDate }" pattern="yyyy-MM-dd"/></div>
+									</div>								</c:when>
+								<c:otherwise>
+									<div class="col-lg-4 form-group" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+										<div class="mt-3">투자종료</div>
+										<div>${ project.fundEnd }</div>
+									</div>
+									<div class="col-lg-4 form-group" style="opacity:0.4; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+										<div class="mt-3">투자금정산</div>
+										<div><fmt:parseDate value="${ project.repaymentDate }" pattern="yyyy-MM-dd HH:mm:ss" var="repaymentDate"/><fmt:formatDate value="${ repaymentDate }" pattern="yyyy-MM-dd"/></div>
+									</div>
+								</c:otherwise>
+								</c:choose>
+							</div>
 							
 							<div class="row gy-4">
 								<div class="col-lg-4 form-group">

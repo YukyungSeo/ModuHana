@@ -48,6 +48,20 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  
+<style type="text/css">
+a {
+	 color:black
+}
+a:hover {
+	 color:var(--color-primary);
+}
+input[type='date'] {
+	border-color: darkgray;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+</style>
 </head>
 
 <body>
@@ -207,10 +221,24 @@
 						
 								<div class="px-5">
 						
+									<div class="col-lg-12" data-aos="zoom-in" data-aos-delay="100" style="margin-bottom:100px;">
+										<h4>투자 현황</h4>
+										
+										<div class="row mt-3">
+											<div class="col-lg-6" id="inProgressFundChart">
+											</div>
+											<div class="col-lg-6" id="cumulativeFundStatus">
+											</div>
+										</div>
+										
+									</div>
+									<!-- End feature item-->
+									
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>투자 중인 내역</h4>
-										<table class="table my-3">
-											<tr>
+										<input type="date"/> ~ <input type="date"/>
+										<table class="table my-3" style="background-color:white">
+											<tr style="background-color:lightgray">
 												<th scope="col">프로젝트명</th>
 												<th scope="col" class="text-end" style="width:25%">신청금액</th>
 												<th scope="col" class="text-end" style="width:25%">신청일</th>
@@ -230,8 +258,9 @@
 						
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>누적 투자 내역</h4>
-										<table class="table my-3">
-											<tr>
+										<input type="date" value="sysdate"/> ~ <input type="date"/>
+										<table class="table my-3" style="background-color:white">
+											<tr style="background-color:lightgray">
 												<th scope="col" style="width:25%">프로젝트명</th>
 												<th scope="col" class="text-end" style="width:25%">신청금액</th>
 												<th scope="col" class="text-end" style="width:25%">신청일</th>
@@ -246,19 +275,6 @@
 											</tr>
 											</c:forEach>
 										</table>
-									</div>
-									<!-- End feature item-->
-						
-									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
-										<h4>투자 현황</h4>
-										
-										<div class="row mt-3">
-											<div class="col-lg-6" id="inProgressFundChart">
-											</div>
-											<div class="col-lg-6" id="cumulativeFundStatus">
-											</div>
-										</div>
-										
 									</div>
 									<!-- End feature item-->
 								</div>
@@ -279,14 +295,14 @@
 						
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>예치금 계좌</h4>
-										<div class="col-lg-6 bg-white p-4 my-4">
+										<div class="col-lg-6 bg-white p-4 my-4 rounded">
 											<a href="#">
 												<img alt="하나은행로고" src="${ path }/resources/assets/img/하나은행-트레이드-로고.jpg" width="21px">
 												KEB하나은행
 												<span class="fw-bold">${ myAccount.accountNo }</span> 
 												<i class="bi bi-clipboard"></i>
 											</a>
-											<div class="text-end fs-4 my-4 bg-light px-4 py-3" id="account-balance-div">
+											<div class="text-end fs-4 my-4 bg-light px-4 py-3 rounded" id="account-balance-div">
 												<fmt:formatNumber value="${ myAccount.balance }" pattern="#,###" /> 원
 											</div>
 											<!-- <div class="d-flex justify-content-center align-items-center"> -->
@@ -299,8 +315,9 @@
 						
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>거래내역</h4>
-										<table class="table my-3" id="transaction-table">
-											<tr>
+										<input type="date" value="sysdate"/> ~ <input type="date"/>
+										<table class="table my-3" id="transaction-table" style="background-color:white">
+											<tr style="background-color:lightgray">
 												<th scope="col" style="width:25%">거래명</th>
 												<th scope="col" class="text-end" style="width:25%">거래금액</th>
 												<th scope="col" class="text-end" style="width:25%">잔액</th>
@@ -523,23 +540,10 @@
 	<script>
 	Highcharts.setOptions({
 	    colors: [
-	    	'#e90061'
-	    	, '#4287f5'
+	    	'#FFB319'
+	    	, '#79B4B7'
 		]
 	});
-	
-	const pieColors = (function () {
-	    var colors = [],
-	        base = Highcharts.getOptions().colors[0],
-	        i;
-
-	    for (i = 0; i < 10; i += 1) {
-	        // Start out with a darkened base color (negative brighten), and end
-	        // up with a much brighter color
-	        colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
-	    }
-	    return colors;
-	}());
 	
 	const inProgressFundChartData = [];
 	<c:forEach items="${ fundMap.inProgressFund }" var="fund">
@@ -557,7 +561,7 @@
 	        marginTop: 50
 	    },
 	    title: {
-	        text: '<b>투자금 배분 현황</ㅠ>'
+	        text: '<b>투자금 배분 현황</b>'
 	    },
 	    tooltip: {
 	        pointFormat: ': <b>{point.percentage:.1f}%</b>'
@@ -571,7 +575,12 @@
 	        pie: {
 	            allowPointSelect: true,
 	            cursor: 'pointer',
-	            colors: pieColors,
+	            colors: [
+	            	'#FFB3B3'
+	            	, '#96CEB4'
+	            	, '#EAE3D2'
+	            	, '#F8F5F1'
+	            ],
 	            dataLabels: {
 	                enabled: true,
 	                format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
@@ -611,7 +620,7 @@
 	        marginTop: 50
 	    },
 	    title: {
-	        text: '<b>누적 투자 현황</ㅠ>'
+	        text: '<b>누적 투자 현황</b>'
 	    },
 	    subtitle: null,
 	    xAxis: {

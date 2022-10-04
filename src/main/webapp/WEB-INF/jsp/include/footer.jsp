@@ -6,13 +6,13 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-12 col-md-6">
 					<div class="footer-info">
-						<h3>UpConstruction</h3>
+						<h3>ModuHana</h3>
 						<p>
-							A108 Adam Street <br> NY 535022, USA<br>
-							<br> <strong>Phone:</strong> +1 5589 55488 55<br> <strong>Email:</strong>
-							info@example.com<br>
+							경기도 광명시 오리로 904 4층 14222<br>
+							<br><strong>Phone:</strong> 02-2139-4810 <strong>Email:</strong> admin@moduhana.com<br>
+							<br>(주)모두하나는 크라우드펀등플랫폼을 운영하는 중개자(온라인소액투자중개업, 통신판매중계자)로서 크라우드 펀딩 프로젝트를 진행하는 당사자가 아니기에, 투자로 인한 손실보전을 담보해드리지 않습니다.<br>
 						</p>
 						<div class="social-links d-flex mt-3">
 							<a href="#" class="d-flex align-items-center justify-content-center">
@@ -32,54 +32,6 @@
 				</div>
 				<!-- End footer info column-->
 
-				<div class="col-lg-2 col-md-3 footer-links">
-					<h4>Useful Links</h4>
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About us</a></li>
-						<li><a href="#">Services</a></li>
-						<li><a href="#">Terms of service</a></li>
-						<li><a href="#">Privacy policy</a></li>
-					</ul>
-				</div>
-				<!-- End footer links column-->
-
-				<div class="col-lg-2 col-md-3 footer-links">
-					<h4>Our Services</h4>
-					<ul>
-						<li><a href="#">Web Design</a></li>
-						<li><a href="#">Web Development</a></li>
-						<li><a href="#">Product Management</a></li>
-						<li><a href="#">Marketing</a></li>
-						<li><a href="#">Graphic Design</a></li>
-					</ul>
-				</div>
-				<!-- End footer links column-->
-
-				<div class="col-lg-2 col-md-3 footer-links">
-					<h4>Hic solutasetp</h4>
-					<ul>
-						<li><a href="#">Molestiae accusamus iure</a></li>
-						<li><a href="#">Excepturi dignissimos</a></li>
-						<li><a href="#">Suscipit distinctio</a></li>
-						<li><a href="#">Dilecta</a></li>
-						<li><a href="#">Sit quas consectetur</a></li>
-					</ul>
-				</div>
-				<!-- End footer links column-->
-
-				<div class="col-lg-2 col-md-3 footer-links">
-					<h4>Nobis illum</h4>
-					<ul>
-						<li><a href="#">Ipsam</a></li>
-						<li><a href="#">Laudantium dolorum</a></li>
-						<li><a href="#">Dinera</a></li>
-						<li><a href="#">Trodelas</a></li>
-						<li><a href="#">Flexo</a></li>
-					</ul>
-				</div>
-				<!-- End footer links column-->
-
 			</div>
 		</div>
 	</div>
@@ -87,15 +39,7 @@
 	<div class="footer-legal text-center position-relative">
 		<div class="container">
 			<div class="copyright">
-				&copy; Copyright <strong><span>UpConstruction</span></strong>. All
-				Rights Reserved
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/upconstruction-bootstrap-construction-website-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+				&copy; Copyright(c) 2022. All Rights Reserved
 			</div>
 		</div>
 	</div>
