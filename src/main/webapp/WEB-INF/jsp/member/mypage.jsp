@@ -405,7 +405,8 @@ input[type='date'] {
         function transfer(){
         	let f = document.transferForm;
         	let json = { 
-        			activeAcctNo : ${ myAccount.accountNo }
+        			apiKey : 'LESNG48LEW5BGAPGSJSS'
+        			, activeAcctNo : ${ myAccount.accountNo }
         			, typeCode : '1'
         			, name : f.name.value
 		        	, amount : f.amount.value
@@ -417,7 +418,7 @@ input[type='date'] {
 					
         	$.ajax({
 
-				url : 'http://192.168.217.59:9990/HanaBank/transfer',
+				url : 'http://13.209.81.235/HanaBank/transfer',
 				method : 'put',
 				data : JSON.stringify(json),
 				contentType: "application/json",
@@ -434,19 +435,20 @@ input[type='date'] {
         
         function getAccountAndTransactionList() {
         	let json = { 
-        			accountNo : '${ myAccount.accountNo }'
+        			apiKey : 'LESNG48LEW5BGAPGSJSS'
+            		, accountNo : '${ myAccount.accountNo }'
 	        	}
         	
         	$.ajax({
 
-				url : 'http://192.168.217.59:9990/HanaBank/account',
+				url : 'http://13.209.81.235/HanaBank/account',
 				method : 'post',
 				data : JSON.stringify(json),
 				contentType: "application/json",
 				success : function(res) {
 					console.log('성공');
-					console.log(res.balance);
-					document.getElementById('account-balance-div').innerHTML = putComa(res.balance) + ` 원`;
+					console.log(res.data.balance);
+					document.getElementById('account-balance-div').innerHTML = putComa(res.data.balance) + ` 원`;
 				},
 				error : function() {
 					alert('실패');
@@ -455,14 +457,14 @@ input[type='date'] {
 			
         	$.ajax({
 
-				url : 'http://192.168.217.59:9990/HanaBank/transaction',
+				url : 'http://13.209.81.235/HanaBank/transaction',
 				method : 'post',
 				data : JSON.stringify(json),
 				contentType: "application/json",
 				success : function(res) {
 					console.log('성공');
-					console.log(res.res);
-					updateMyPageTranfer(res);
+					console.log(res);
+					updateMyPageTranfer(res.data);
 				},
 				error : function() {
 					alert('실패');
@@ -488,7 +490,7 @@ input[type='date'] {
 					+ `<td style="width:25%"><c:out value="` + transaction.name + `"/></td>`
 					+ `<td class="text-end" style="width:25%">` + putComa(transaction.amount) + `원</td>`
 					+ `<td class="text-end" style="width:25%">` + putComa(transaction.balance) + `원</td>`
-					+ `<td  class="text-end" style="width:25%">` + putComa(transaction.regDate).split(' ')[0] + `</td>`
+					+ `<td  class="text-end" style="width:25%">` + transaction.regDate.split(' ')[0] + `</td>`
 					+ `</tr>`;
 					
 					

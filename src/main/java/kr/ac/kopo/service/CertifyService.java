@@ -15,6 +15,7 @@ import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @PropertySource("classpath:coolsms.properties")
+@PropertySource("classpath:hanabank.properties")
 public class CertifyService {
 
+	@Value("${key}")
+	private String apiKey;
+	
 	private final MemberDAO memberDAO;
 	private final AccountDAO accountDAO;
 
@@ -191,12 +196,13 @@ public class CertifyService {
 		accountVO.setPassword(password);
 		accountVO.setMemberId(user.getId());
 		accountVO.setName(user.getName() + "님의 예치금 계좌");
-		accountVO.setTypeCode("02"); // 02는 예치금 계좌
+		accountVO.setTypeCode("2"); // 2는 예치금 계좌
 
 		// api request 보내기
-		String url = "http://localhost:9990/HanaBank/account/create/member";
+		String url = "http://13.209.81.235/HanaBank/account/creation";
 
 		JSONObject param = new JSONObject();
+		param.put("apiKey", apiKey);
 		param.put("user", new JSONObject(memberVO));
 		param.put("account", new JSONObject(accountVO));
 		
@@ -204,7 +210,8 @@ public class CertifyService {
 
 		// JSONOject 파싱
 		Gson gson = new Gson();
-		AccountVO newAccount = gson.fromJson(jsonObject.toString(), AccountVO.class);
+		JSONObject data = jsonObject.getJSONObject("data");
+		AccountVO newAccount = gson.fromJson(data.toString(), AccountVO.class);
 		newAccount.setMemberId(user.getId());
 		
 		// newAccount 저장

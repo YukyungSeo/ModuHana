@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,8 +23,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@PropertySource("classpath:hanabank.properties")
 public class AccountService {
 
+	@Value("${key}")
+	private String apiKey;
+	
 	private final AccountDAO accountDAO;
 	private final ProjectService projectService;
 	private final FundService fundService;
@@ -34,16 +40,19 @@ public class AccountService {
 	public AccountVO getAccountByAccountNoFromBankAPI(String accountNo) {
 
 		// api request 보내기
-		String url = "http://localhost:9990/HanaBank/account";
+		String url = "http://13.209.81.235/HanaBank/account";
 
 		JSONObject param = new JSONObject();
+		System.out.println(apiKey);
+		param.put("apiKey", apiKey);
 		param.put("accountNo", accountNo);
 
 		JSONObject jsonObject = HttpUtil.callApi(url, param, "POST");
 
 		// JSONOject 파싱
 		Gson gson = new Gson();
-		AccountVO accountVO = gson.fromJson(jsonObject.toString(), AccountVO.class);
+		JSONObject data = jsonObject.getJSONObject("data");
+		AccountVO accountVO = gson.fromJson(data.toString(), AccountVO.class);
 
 		return accountVO;
 	}
@@ -51,15 +60,17 @@ public class AccountService {
 	public List<TransactionVO> getTransactionListByAccountNoFromBankAPI(String accountNo) {
 
 		// api request 보내기
-		String url = "http://localhost:9990/HanaBank/transaction";
+		String url = "http://13.209.81.235/HanaBank/transaction";
 
 		JSONObject param = new JSONObject();
+		param.put("apiKey", apiKey);
 		param.put("accountNo", accountNo);
 
 		JSONObject jsonObject = HttpUtil.callApi(url, param, "POST");
 
 		// JSONOject 파싱
-		JSONArray jsonArray = jsonObject.getJSONArray("transactionList");
+		JSONObject data = jsonObject.getJSONObject("data");
+		JSONArray jsonArray = data.getJSONArray("transactionList");
 		ArrayList<TransactionVO> transactionList = new ArrayList<>();
 
 		// Checking whether the JSON array has some value or not
@@ -96,9 +107,10 @@ public class AccountService {
 		ProjectVO project = projectService.getProjectByProjectSeq(fundVO.getProjectSeq());
 
 		// api request 보내기
-		String url = "http://localhost:9990/HanaBank/transfer";
+		String url = "http://13.209.81.235/HanaBank/transfer";
 
 		JSONObject param = new JSONObject();
+		param.put("apiKey", apiKey);
 		param.put("activeAcctNo", fundVO.getMemberAccountNo());
 		param.put("typeCode", "03");
 		param.put("name", project.getTitle() + " 투자");
@@ -107,6 +119,7 @@ public class AccountService {
 		param.put("dealAcctNo", project.getAccountNo());
 		param.put("dealName", user.getName());
 		param.put("password", password);
+		System.out.println("param : " + param);
 
 		JSONObject jsonObject = HttpUtil.callApi(url, param, "PUT");
 
