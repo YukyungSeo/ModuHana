@@ -18,14 +18,38 @@
 	<script>	
 	let json = { 
 			apiKey : 'LESNG48LEW5BGAPGSJSS'
+    		, accountNo : 000
+    	}
+	console.log(JSON.stringify(json));
+	
+	$.ajax({
+
+		url : 'http://localhost:9990/HanaBank/account',
+		type : 'GET',
+		data : json,
+		contentType: "application/json",
+		success : function(res) {
+			console.log('성공');
+			console.log(res);
+		},
+		error : function(res) {
+			console.log(res)
+			alert('실패');
+		}
+	})
+	</script>
+<!-- 	<script>	
+	let json = { 
+			apiKey : 'LESNG48LEW5BGAPGSJSS'
     		, accountNo : '41209465170991'
     	}
 	
 	$.ajax({
 
-		url : 'http://13.209.81.235/HanaBank/account',
-		method : 'post',
-		data : JSON.stringify(json),
+		url : 'http://localhost:9990/HanaBank/account',
+		type : 'GET',
+		data : json,
+		dataType: "json",
 		contentType: "application/json",
 		success : function(res) {
 			console.log('성공');
@@ -35,7 +59,7 @@
 			alert('실패');
 		}
 	})
-	</script>
+	</script> -->
 </body>
 </html>
 

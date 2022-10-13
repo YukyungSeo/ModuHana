@@ -40,14 +40,8 @@ public class AccountService {
 	public AccountVO getAccountByAccountNoFromBankAPI(String accountNo) {
 
 		// api request 보내기
-		String url = "http://13.209.81.235/HanaBank/account";
-
-		JSONObject param = new JSONObject();
-		System.out.println(apiKey);
-		param.put("apiKey", apiKey);
-		param.put("accountNo", accountNo);
-
-		JSONObject jsonObject = HttpUtil.callApi(url, param, "POST");
+		String url = "http://13.209.81.235/HanaBank/account?apiKey=" + apiKey + "&accountNo=" + accountNo;
+		JSONObject jsonObject = HttpUtil.callApiGet(url, "GET");
 
 		// JSONOject 파싱
 		Gson gson = new Gson();
@@ -60,13 +54,8 @@ public class AccountService {
 	public List<TransactionVO> getTransactionListByAccountNoFromBankAPI(String accountNo) {
 
 		// api request 보내기
-		String url = "http://13.209.81.235/HanaBank/transaction";
-
-		JSONObject param = new JSONObject();
-		param.put("apiKey", apiKey);
-		param.put("accountNo", accountNo);
-
-		JSONObject jsonObject = HttpUtil.callApi(url, param, "POST");
+		String url = "http://13.209.81.235/HanaBank/transaction?apiKey=" + apiKey + "&accountNo=" + accountNo;
+		JSONObject jsonObject = HttpUtil.callApiGet(url, "GET");
 
 		// JSONOject 파싱
 		JSONObject data = jsonObject.getJSONObject("data");
@@ -121,7 +110,7 @@ public class AccountService {
 		param.put("password", password);
 		System.out.println("param : " + param);
 
-		JSONObject jsonObject = HttpUtil.callApi(url, param, "PUT");
+		JSONObject jsonObject = HttpUtil.callApiExceptGet(url, param, "PUT");
 
 		System.out.println("jsonObject : " + jsonObject);
 	}

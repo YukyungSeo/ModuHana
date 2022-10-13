@@ -8,13 +8,69 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HttpUtil {
 
-	public static JSONObject callApi(String arriveUrl, JSONObject params, String type) {
+	public static JSONObject callApiGet(String arriveUrl, String type) {
+
+		URL url = null;
+		String readLine = null;
+		StringBuilder buffer = null;
+		BufferedReader bufferedReader = null;
+		BufferedWriter bufferedWriter = null;
+		HttpURLConnection urlConnection = null;
+
+		int connTimeout = 5000;
+		int readTimeout = 3000;
+
+		try {
+			url = new URL(arriveUrl);
+			urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setRequestMethod("GET");
+			urlConnection.setConnectTimeout(connTimeout);
+			urlConnection.setReadTimeout(readTimeout);
+			urlConnection.setRequestProperty("Accept", "application/json;");
+
+			buffer = new StringBuilder();
+			if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+				while ((readLine = bufferedReader.readLine()) != null) {
+					buffer.append(readLine).append("\n");
+				}
+			} else {
+				buffer.append("code : ");
+				buffer.append(urlConnection.getResponseCode()).append("\n");
+				buffer.append("message : ");
+				buffer.append(urlConnection.getResponseMessage()).append("\n");
+			}
+
+			System.out.println("결과 : " + buffer.toString());
+
+			return new JSONObject(buffer.toString());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (bufferedWriter != null) {
+					bufferedWriter.close();
+				}
+				if (bufferedReader != null) {
+					bufferedReader.close();
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		return null;
+	}
+
+	public static JSONObject callApiExceptGet(String arriveUrl, JSONObject params, String type) {
 
 		HttpURLConnection conn = null;
 		JSONObject responseJson = null;
@@ -42,7 +98,7 @@ public class HttpUtil {
 			// 보내고 결과값 받기
 			int responseCode = conn.getResponseCode();
 
-			if (responseCode == 200) {
+			if (responseCode == 200 || responseCode == 201) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				StringBuilder sb = new StringBuilder();
 				String line = "";
@@ -51,7 +107,7 @@ public class HttpUtil {
 				}
 
 				// 응답 데이터
-				if(sb != null && sb.length() != 0) {
+				if (sb != null && sb.length() != 0) {
 					System.out.println("responseJson:: " + sb.toString());
 					responseJson = new JSONObject(sb.toString());
 				}
@@ -70,4 +126,5 @@ public class HttpUtil {
 
 		return null;
 	}
+
 }

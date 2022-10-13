@@ -434,7 +434,7 @@ input[type='date'] {
         }
         
         function getAccountAndTransactionList() {
-        	let json = { 
+        	let apiData = { 
         			apiKey : 'LESNG48LEW5BGAPGSJSS'
             		, accountNo : '${ myAccount.accountNo }'
 	        	}
@@ -442,8 +442,8 @@ input[type='date'] {
         	$.ajax({
 
 				url : 'http://13.209.81.235/HanaBank/account',
-				method : 'post',
-				data : JSON.stringify(json),
+				method : 'get',
+				data : apiData,
 				contentType: "application/json",
 				success : function(res) {
 					console.log('성공');
@@ -458,8 +458,8 @@ input[type='date'] {
         	$.ajax({
 
 				url : 'http://13.209.81.235/HanaBank/transaction',
-				method : 'post',
-				data : JSON.stringify(json),
+				method : 'get',
+				data : apiData,
 				contentType: "application/json",
 				success : function(res) {
 					console.log('성공');
@@ -521,7 +521,7 @@ input[type='date'] {
         }
 
         function putComa(val){
-        	return val.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        	return val.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         }
         $('#amountShow').change(function(){
         	let amountShowVal = $('#amountShow').val().replace(',', '');

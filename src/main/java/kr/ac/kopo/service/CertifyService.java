@@ -203,11 +203,12 @@ public class CertifyService {
 
 		JSONObject param = new JSONObject();
 		param.put("apiKey", apiKey);
-		param.put("user", new JSONObject(memberVO));
+		param.put("user",  new JSONObject(memberVO));
 		param.put("account", new JSONObject(accountVO));
+		System.out.println(param);
 		
-		JSONObject jsonObject = HttpUtil.callApi(url, param, "POST");
-
+		JSONObject jsonObject = HttpUtil.callApiExceptGet(url, param, "POST");
+		
 		// JSONOject 파싱
 		Gson gson = new Gson();
 		JSONObject data = jsonObject.getJSONObject("data");
