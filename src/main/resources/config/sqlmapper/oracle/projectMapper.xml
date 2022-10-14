@@ -98,7 +98,7 @@
         AND F.TYPE_CODE = 0
 	</sql>
 	<sql id="selectOrder">
-		ORDER BY FUND_START DESC
+		ORDER BY PROGRESS_CODE
 	</sql>
 	<sql id="selectNine">
         OFFSET 0 ROWS

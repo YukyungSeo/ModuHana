@@ -40,7 +40,7 @@ public class AccountService {
 	public AccountVO getAccountByAccountNoFromBankAPI(String accountNo) {
 
 		// api request 보내기
-		String url = "http://13.209.81.235/HanaBank/account?apiKey=" + apiKey + "&accountNo=" + accountNo;
+		String url = "http://localhost:9990/HanaBank/account?apiKey=" + apiKey + "&accountNo=" + accountNo;
 		JSONObject jsonObject = HttpUtil.callApiGet(url, "GET");
 
 		// JSONOject 파싱

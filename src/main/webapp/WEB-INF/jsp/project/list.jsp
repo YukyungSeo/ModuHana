@@ -84,19 +84,23 @@
 
 							<div class="post-img position-relative overflow-hidden">
 								<img src="${ path }/${ project.signImgPath }/${ project.signImgName }" class="img-fluid" alt="" style="height: 230px;">
-								<span class="post-date">
-									<c:choose>
-										<c:when test="${ project.startDDay > 0 }">
+								<c:choose>
+									<c:when test="${ project.startDDay > 0 }">
+										<span class="post-date" style="background-color:purple">
 											<td>모집 예정</td>
-										</c:when>
-										<c:when test="${ project.endDDay > 0 }">
+										</span>
+									</c:when>
+									<c:when test="${ project.endDDay > 0 }">
+										<span class="post-date">
 											<td><c:out value="${ project.endDDay }"/>일 남음</td>
-										</c:when>
-										<c:otherwise>
+										</span>
+									</c:when>
+									<c:otherwise>
+										<span class="post-date" style="background-color:gray">
 											<td>모집 마감</td>
-										</c:otherwise>
-									</c:choose>
-								</span>
+										</span>
+									</c:otherwise>
+								</c:choose>
 							</div>
 
 							<div class="post-content d-flex flex-column">
