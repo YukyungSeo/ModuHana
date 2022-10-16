@@ -61,8 +61,8 @@
 							K-콘텐츠 투자 플랫폼 <br><span>모두하나</span>
 						</h2>
 						<p data-aos="fade-up">누구나 문화콘텐츠에 투자할 수 있는 기회. <br>모두하나를 통해 콘텐츠에 투자하세요. <br> 드라마, 영화, 뮤지컬, 음악, 공연 등 여러 분야의 상품이 여러분을 기다립니다.</p>
-						<a data-aos="fade-up" data-aos-delay="200" href="#get-started"
-							class="btn-get-started">Get Started</a>
+						<a data-aos="fade-up" data-aos-delay="200" href="${ path }/project/list"
+							class="btn-get-started">모두하나에서 투자하기</a>
 					</div>
 				</div>
 			</div>
