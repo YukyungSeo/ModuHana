@@ -1990,7 +1990,8 @@ section#category {
 }
 
 .fund-form-section .fund-form button:hover {
-  background: rgba(254, 185, 0, 0.8);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 @keyframes animate-loading {

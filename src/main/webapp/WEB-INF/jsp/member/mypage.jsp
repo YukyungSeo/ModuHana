@@ -236,14 +236,17 @@ input[type='date'] {
 									
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>투자 중인 내역</h4>
-										<input type="date"/> ~ <input type="date"/>
+										<!-- <input type="date" class="firstDayOfMonth"/> ~ <input type="date"  class="today"/> -->
 										<table class="table my-3" style="background-color:white">
 											<tr style="background-color:lightgray">
 												<th scope="col">프로젝트명</th>
 												<th scope="col" class="text-end" style="width:25%">신청금액</th>
 												<th scope="col" class="text-end" style="width:25%">신청일</th>
-												<th scope="col" class="text-end" style="width:25%">종료일</th>
+												<th scope="col" class="text-end" style="width:25%">프로젝트 종료일</th>
 											</tr>
+											<c:if test="${ empty fundMap.inProgressFund }">
+												<td class="text-center">현재 투자 중인 내역이 없습니다.</td>
+											</c:if>
 											<c:forEach items="${ fundMap.inProgressFund }" var="fund">		
 											<tr>
 												<td style="width:25%"><a href="${ path }/fund/detail/${ fund.fundSeq }"><c:out value="${ fund.projectTitle }"/></a></td>
@@ -258,14 +261,17 @@ input[type='date'] {
 						
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>누적 투자 내역</h4>
-										<input type="date" value="sysdate"/> ~ <input type="date"/>
+										<!-- <input type="date" class="firstDayOfMonth"/> ~ <input type="date" class="today"/> -->
 										<table class="table my-3" style="background-color:white">
 											<tr style="background-color:lightgray">
 												<th scope="col" style="width:25%">프로젝트명</th>
 												<th scope="col" class="text-end" style="width:25%">신청금액</th>
 												<th scope="col" class="text-end" style="width:25%">신청일</th>
-												<th scope="col" class="text-end" style="width:25%">종료일</th>
+												<th scope="col" class="text-end" style="width:25%">프로젝트 종료일</th>
 											</tr>
+											<c:if test="${ empty fundMap.cumulativeFund }">
+												<td class="text-center">종료된 투자 내역이 없습니다.</td>
+											</c:if>
 											<c:forEach items="${ fundMap.cumulativeFund }" var="fund">		
 											<tr>
 												<td style="width:25%"><a href="${ path }/fund/detail/${ fund.fundSeq }"><c:out value="${ fund.projectTitle }"/></a></td>
@@ -315,7 +321,7 @@ input[type='date'] {
 						
 									<div class="col-lg-12 mb-5" data-aos="zoom-in" data-aos-delay="100">
 										<h4>거래내역</h4>
-										<input type="date" value="sysdate"/> ~ <input type="date"/>
+										<input type="date" class="firstDayOfMonth"/> ~ <input type="date" class="today"/>
 										<table class="table my-3" id="transaction-table" style="background-color:white">
 											<tr style="background-color:lightgray">
 												<th scope="col" style="width:25%">거래명</th>
@@ -323,6 +329,9 @@ input[type='date'] {
 												<th scope="col" class="text-end" style="width:25%">잔액</th>
 												<th scope="col" class="text-end" style="width:25%">거래일자</th>
 											</tr>
+											<c:if test="${ empty transactionList }">
+												<td class="text-center">거래내역이 존재하지 않습니다.</td>
+											</c:if>
 											<c:forEach items="${ transactionList }" var="transaction">		
 											<tr>
 												<td style="width:25%"><c:out value="${ transaction.name }"/></td>
@@ -372,6 +381,38 @@ input[type='date'] {
 	<script src="${ path }/resources/assets/js/main.js"></script>
 	
 	<!-- My Javascript -->
+	<script>
+		let todayInputs = document.getElementsByClassName('today');
+		for(let i = 0; i<todayInputs.length; i++){
+			todayInputs[i].value= getToday();
+			//console.log(new Date());
+		}
+		
+		let firstDayOfMonthInputs = document.getElementsByClassName('firstDayOfMonth');
+		for(let i = 0; i<firstDayOfMonthInputs.length; i++){
+			firstDayOfMonthInputs[i].value= getFirstDayOfMonth();
+			//console.log(new Date());
+		}
+		
+		function getToday(){
+		    var date = new Date();
+		    var year = date.getFullYear();
+		    var month = ("0" + (1 + date.getMonth())).slice(-2);
+		    var day = ("0" + date.getDate()).slice(-2);
+
+		    return year + "-" + month + "-" + day;
+		}
+		
+		function getFirstDayOfMonth(){
+		    var date = new Date();
+		    var year = date.getFullYear();
+		    var month = ("0" + (1 + date.getMonth())).slice(-2);
+		    var day = "01";
+
+		    return year + "-" + month + "-" + day;
+		}
+	</script>
+	
 	<script src="${ path }/resources/assets/js/jquery-3.6.1.min.js"></script>
 	<script>
 		function modalShow(modalName) {

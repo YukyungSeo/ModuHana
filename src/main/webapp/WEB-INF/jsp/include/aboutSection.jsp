@@ -20,8 +20,16 @@
 				
 				<div class="row">
 					
-					<div class="col-lg-7 rounded-start"
-						style="background-image: url('${ path }/${ projectFileMap.sign.path }/${ projectFileMap.sign.saveName }'); background-repeat:no-repeat; background-size:cover;"></div>
+					<c:choose>
+						<c:when test="${ not empty projectFileMap.sign.path }">
+							<div class="col-lg-7 rounded-start"
+								style="background-image: url('${ path }/${ projectFileMap.sign.path }/${ projectFileMap.sign.saveName }'); background-repeat:no-repeat; background-size:cover;"></div>
+						</c:when>
+						<c:otherwise>
+						<div class="col-lg-7 rounded-start"
+								style="background-image: url('${ projectFileMap.sign.saveName }'); background-repeat:no-repeat; background-size:cover;"></div>
+						</c:otherwise>
+					</c:choose>
 
 					<div class="col-lg-5">
 						<div class="our-story rounded-end">

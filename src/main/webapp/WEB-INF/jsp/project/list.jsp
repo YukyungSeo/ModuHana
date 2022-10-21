@@ -82,8 +82,16 @@
 					<div class="col-xl-4 col-md-6">
 						<div class="post-item position-relative h-100">
 
-							<div class="post-img position-relative overflow-hidden">
-								<img src="${ path }/${ project.signImgPath }/${ project.signImgName }" class="img-fluid" alt="" style="height: 230px;">
+							<div class="post-img position-relative overflow-hidden text-center">
+								<c:choose>
+									<c:when test="${ empty project.signImgPath }">
+										<img src="${ project.signImgName }" class="img-fluid" alt="" style="height: 230px;">
+									</c:when>
+									<c:otherwise>
+										<img src="${ path }/${ project.signImgPath }/${ project.signImgName }" class="img-fluid" alt="" style="height: 230px;">
+									</c:otherwise>
+								</c:choose>
+								
 								<c:choose>
 									<c:when test="${ project.startDDay > 0 }">
 										<span class="post-date" style="background-color:purple">
